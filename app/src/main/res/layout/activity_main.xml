@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/IVlogo"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/logo_green_flag2x" />
+
+    <TextView
+        android:id="@+id/TVtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/IVlogo"
+        android:layout_alignBottom="@id/IVlogo"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-150dp"
+        android:ems="12"
+        android:text="GreenFlag customers can create an account to access"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/TVventaja1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/TVtitulo"
+        android:layout_alignBottom="@id/TVtitulo"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-50dp"
+        android:text=" Car health updates"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/tick2x" />
+
+    <TextView
+        android:id="@+id/TVventaja2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/TVventaja1"
+        android:layout_alignBottom="@id/TVventaja1"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-40dp"
+        android:text=" Reques a rescue online"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/tick2x" />
+
+    <TextView
+        android:id="@+id/TVventaja3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/TVventaja2"
+        android:layout_alignBottom="@id/TVventaja2"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-40dp"
+        android:text=" Policy information"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/tick2x" />
+
+    <ImageButton
+        android:id="@+id/IMBLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/TVventaja3"
+        android:layout_alignBottom="@id/TVventaja3"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-100dp"
+        app:srcCompat="@drawable/gradient_button_background" />
+
+    <TextView
+        android:id="@+id/TVLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@id/IMBLogin"
+        android:layout_alignTop="@+id/IMBLogin"
+        android:layout_alignEnd="@id/IMBLogin"
+        android:layout_alignBottom="@id/IMBLogin"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/IMBCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignStart="@id/IMBLogin"
+        android:layout_alignBottom="@id/IMBLogin"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="-70dp"
+        app:srcCompat="@drawable/gradient_button_background" />
+
+    <TextView
+        android:id="@+id/TVCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@id/IMBCreateAccount"
+        android:layout_alignTop="@+id/IMBCreateAccount"
+        android:layout_alignEnd="@id/IMBCreateAccount"
+        android:layout_alignBottom="@id/IMBCreateAccount"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Create Account"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
