@@ -35,29 +35,49 @@ public class CreateAccountActivity extends AppCompatActivity {
         pwdConfirmCA = findViewById(R.id.ETPasswordConfirmCA);
         btnCA = findViewById(R.id.BtnCreateNew);
 
-//        btnCA.setEnabled(false);
-//        btnCA.setVisibility(View.INVISIBLE);
+        btnCA.setEnabled(false);
+        btnCA.setVisibility(View.INVISIBLE);
 
-//        pwdConfirmCA.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if(validateAll(emailCA.getText().toString().trim(), pwdCA.getText().toString().trim(), pwdConfirmCA.getText().toString().trim() )){
-//                    btnCA.setEnabled(true);
-//                    btnCA.setVisibility(View.VISIBLE);
-//                }
-//                else {
-//                    btnCA.setEnabled(false);
-//                    btnCA.setVisibility(View.INVISIBLE);
-//                }
-//            }
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
+        emailCA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String emailTxt = emailCA.getText().toString().trim();
+                if(!validateEmail(emailTxt) || !validateLengthEmail(emailTxt)){
+                    emailCA.setError("Invalid email");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        pwdConfirmCA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(validateAll(emailCA.getText().toString().trim(), pwdCA.getText().toString().trim(), pwdConfirmCA.getText().toString().trim() )){
+                    btnCA.setEnabled(true);
+                    btnCA.setVisibility(View.VISIBLE);
+                }
+                else {
+                    btnCA.setEnabled(false);
+                    btnCA.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         btnCA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +85,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 //Guardo y creo la cuenta
                 DbHelper dbh = new DbHelper(CreateAccountActivity.this);
                 SQLiteDatabase db = dbh.getWritableDatabase();
-                db.execSQL(dbh.CMDTRUNCATE_TABLE);
                 db.execSQL(DBQuerys.insertQuery(emailCA.getText().toString().trim(), pwdCA.getText().toString().trim()));
                 if(db != null ){
                     Toast.makeText(CreateAccountActivity.this,"The User was created", Toast.LENGTH_SHORT).show();
@@ -78,31 +97,21 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public boolean validateEmail(String email){
-        boolean emailValid = false;
         // Patrón para validar el email
         Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                .compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(email);
 
-        if (mather.find()) {
-            emailValid = true;
-        }
-        return emailValid;
+        return mather.find();
     }
 
     public boolean validateLengthEmail(String email){
-            if(email.length() > 6){
-                return true;
-            }
-        return false;
+        return email.length() > 6;
     }
 
     public boolean validateLengthPwd(String pwd){
-        if(pwd.length() > 8){
-            return true;
-        }
-        return false;
+        return pwd.length() >= 8;
     }
 
     public boolean validateLowerCase(String pwd){
