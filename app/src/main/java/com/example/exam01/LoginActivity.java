@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailLogin;
     private EditText pwdLogin;
     private ImageButton btnLogin;
+    private DbHelper dbh;
     private SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        pwdLogin.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String textoPwd = pwdLogin.getText().toString().trim();
-                if(!(CAActivity.validateLengthPwd(textoPwd) && CAActivity.validateUpperCase(textoPwd) && CAActivity.validateLowerCase(textoPwd))){
-                    pwdLogin.setError("Favor de colocar contraseña valida");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,25 +72,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loadEmail(SQLiteDatabase db){
-        Cursor cursor = db.rawQuery("SELECT * FROM Users", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Users order by 1 desc", null);
         cursor.moveToFirst();
-        emailLogin.setText(cursor.getString(1));
+        emailLogin.setText(cursor.getString(1).toString());
         Toast.makeText(LoginActivity.this, "Se recupero el correo", Toast.LENGTH_SHORT).show();
-        cursor.close();
     }
     public boolean verifyData(SQLiteDatabase db){
         Cursor cursor = db.rawQuery("SELECT * FROM Users", null);
         if(cursor.moveToFirst()){
             do{
-                Toast.makeText(LoginActivity.this, emailLogin.getText().toString().trim() + cursor.getString(1), Toast.LENGTH_SHORT).show();
-
-                if( (emailLogin.getText().toString().trim().equals(cursor.getString(1).trim())) && (pwdLogin.getText().toString().trim().equals(cursor.getString(2).trim())) ){
-                    cursor.close();
+                if( (emailLogin.getText().toString().trim().equals(cursor.getString(1).toString().trim())) && (pwdLogin.getText().toString().trim().equals(cursor.getString(2).toString().trim())) ){
                     return true;
                 }
             }while(cursor.moveToNext());
         }
-        cursor.close();
         return false;
     }
 }

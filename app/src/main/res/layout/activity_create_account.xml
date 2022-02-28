@@ -108,4 +108,21 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="-80dp"
         app:srcCompat="@drawable/gradient_button_background" />
+
+    <TextView
+        android:id="@+id/TVCA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@id/BtnCreateNew"
+        android:layout_alignTop="@+id/BtnCreateNew"
+        android:layout_alignEnd="@id/BtnCreateNew"
+        android:layout_alignBottom="@id/BtnCreateNew"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Create Account"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 </RelativeLayout>

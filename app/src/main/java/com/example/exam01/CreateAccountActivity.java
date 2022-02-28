@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.exam01.db.DBQuerys;
@@ -24,6 +25,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText pwdCA;
     private EditText pwdConfirmCA;
     private ImageButton btnCA;
+    private TextView txtViewCA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         pwdCA = findViewById(R.id.ETPasswordCA);
         pwdConfirmCA = findViewById(R.id.ETPasswordConfirmCA);
         btnCA = findViewById(R.id.BtnCreateNew);
+        txtViewCA = findViewById(R.id.TVCA);
 
         btnCA.setEnabled(false);
         btnCA.setVisibility(View.INVISIBLE);
+        txtViewCA.setVisibility(View.INVISIBLE);
 
         emailCA.addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,10 +72,13 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(validateAll(emailCA.getText().toString().trim(), pwdCA.getText().toString().trim(), pwdConfirmCA.getText().toString().trim() )){
                     btnCA.setEnabled(true);
                     btnCA.setVisibility(View.VISIBLE);
+                    txtViewCA.setVisibility(View.VISIBLE);
                 }
                 else {
+                    pwdConfirmCA.setError("Invalid Password");
                     btnCA.setEnabled(false);
                     btnCA.setVisibility(View.INVISIBLE);
+                    txtViewCA.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
@@ -111,7 +118,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public boolean validateLengthPwd(String pwd){
-        return pwd.length() >= 8;
+        return pwd.length() > 8;
     }
 
     public boolean validateLowerCase(String pwd){
@@ -134,13 +141,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public boolean validateMatch(String pwd1, String pwd2){
-        if(pwd1.equals(pwd2)){
-            return true;
-        }
-        else{
-            Toast.makeText(CreateAccountActivity.this,"The passwords should be equals", Toast.LENGTH_LONG).show();
-            return false;
-        }
+        return (pwd1.equals(pwd2));
     }
 
     public boolean validateAll(String email, String pwd1, String pwd2){
@@ -158,15 +159,12 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
         if (!validateMatch(pwd1, pwd2)){
-            Toast.makeText(CreateAccountActivity.this,"The passwords should be equals", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!validateLowerCase(pwd1)){
-            Toast.makeText(CreateAccountActivity.this,"The password should has at least one lower case letter",Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!validateUpperCase(pwd1)){
-            Toast.makeText(CreateAccountActivity.this,"The password should has at least one lower case letter",Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
