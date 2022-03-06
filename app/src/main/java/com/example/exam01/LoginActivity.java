@@ -20,8 +20,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailLogin;
     private EditText pwdLogin;
     private ImageButton btnLogin;
+
+    // lets remove unused variables or methods
+    // remove all commented code
     private DbHelper dbh;
     private SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         emailLogin = findViewById(R.id.ETEmail);
         pwdLogin = findViewById(R.id.ETPassword);
         btnLogin = findViewById(R.id.BtnLogin);
+
+        // I like the use of this database
+        // take a look into Room DB in android basically an abstraction of SQLite db
         DbHelper dbh = new DbHelper(LoginActivity.this);
         SQLiteDatabase db = dbh.getReadableDatabase();
 
@@ -47,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String textoEmail = emailLogin.getText().toString().trim();
                 if(!(CAActivity.validateLengthEmail(textoEmail) && CAActivity.validateEmail(textoEmail))){
+
+                    // let's use English to display messages
                     emailLogin.setError("Favor de validar el correo");
                 }
             }
